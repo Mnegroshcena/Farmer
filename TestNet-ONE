@@ -1,0 +1,22 @@
+ var Header = function (container) {
+            var id = 'li[rel = "' + _guid + '"] '+ ".context";
+            var template = '<div class="header" style="clear:both; font-size: small;"><div class="context" style="clear:both; overflow:hidden"></div><div class="header_button collapse"></div><div class="buttons">&nbsp;</div></div>';
+            Header.superClass.apply(this, [id, template, container]);
+
+            this.appendTo = function (parent) {
+                $(parent).append(this.template);
+                return this;
+            }
+
+            var _expanded = true;
+
+            this.expand = function(callback){
+                _expanded = true;
+                _windowContainer.find('.header_button').removeClass('expand').addClass('collapse');
+                this.element().animate({
+                    height: this.container['title'].element().outerHeight() + this.container['description'].element().outerHeight()
+                }, "fast", callback);
+            }
+
+            this.height = function (height) {
+                return _windowContainer.find('.header').outerHeight()
